@@ -24,6 +24,29 @@ Fruit.prototype.changePrice = function () {
 	}
 }
 
+function sellOff(fruitArray, userArray) {
+
+	salesApples = user.apple[2]*fruitArray[0].price;
+	salesOranges = user.orange[2]*fruitArray[1].price;
+	salesBananas = user.banana[2]*fruitArray[2].price;
+	salesPears = user.pear[2]*fruitArray[3].price;
+	marketSweep = salesApples + salesOranges + salesBananas + salesPears;
+	
+
+	$("button").remove();          //hide buttons
+
+	user.apple[2] = 0;
+	user.orange[2] = 0;
+	user.banana[2] = 0;
+	user.pear[2] = 0;
+
+	return marketSweep
+
+//	$("#userPurchases").append("<div> <button class='sell> Sell it All! </button> </div>");    //create sell off button
+//on button click, display the user cash + market sweep. 	
+
+}
+
 var apples = new Fruit ("apples");
 var oranges = new Fruit ("oranges");
 var bananas = new Fruit ("bananas");
@@ -47,6 +70,12 @@ var user = {
 	cash: 50
 };
 
+var marketSweep;
+var	salesApples;
+var	salesOranges;
+var	salesBananas;
+var	salesPears;
+
 $(document).ready(function(){
 	$("#bananasPrice").text(bananas.price);
 	$("#applesPrice").text(apples.price);
@@ -65,9 +94,13 @@ $(document).ready(function(){
 		j++;
 		if (j == 3) {
 			clearInterval(timer);
-			sellOff(fruitArray, user);
-			console.log(user.pear[0]);
+			var newTotal = sellOff(fruitArray, user);
+			newTotal = roundCost(newTotal);
+			allWeGot = user.cash+newTotal;
+			$("#userPurchases").text("Dollars Remaining: $" + allWeGot);
+			alert("We've sold it all! And here's our total cash: " + allWeGot + "!");
 			}
+			
 		}, 5000);
 
 	$("#bananaButton").on("click", function() {
