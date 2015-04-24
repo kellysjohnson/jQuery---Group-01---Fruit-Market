@@ -15,7 +15,7 @@ function Fruit (name) {
 }
 
 Fruit.prototype.changePrice = function () {
-	this.price += randomNumber(-50, 50) / 100;
+	this.price += randomNumber(-25, 25) / 100;
 	this.price = Math.round(100*this.price)/100;
 	if (this.price > 9.99) {
 		this.price = 9.99;
@@ -44,7 +44,7 @@ var user = {
 	orange: userOrange,
 	//grape: userGrape,
 	pear: userPear,
-	cash: 100
+	cash: 50
 };
 
 $(document).ready(function(){
